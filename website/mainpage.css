@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695C;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+}
+
+body {
+    height: 100vh;
+    background: var(--body-color);
+}
+
+.logo{
+    height: 100px;
+    width: 200px;
+    background-color: #707070;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 450px;
+    background: var(--sidebar-color);
+}
+
+.image-text{
+    display: flex;
+    align-items: center;
+}
+
+.header-text{
+    font-size: 50px;
+}
+
+.targets{
+    position: relative;
+}
+
+.route, .restaurant, .hotel, .parking{
+   margin-left: 50px;
+   width: 25px;
+   height: 25px;
+   transform: translateY(-50%);
+   margin-top: 50px;
+}
+
+.targets i {
+    font-size: 40px; /* Adjust this value to change the size of the icons */
+}
+
+input[type="text"] {
+    width: 300px; /* Adjust this value to change the width of the search bar */
+    padding: 25px; /* Adjust this value to change the padding of the search bar */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Border radius */
+    font-size: 16px; /* Font size */
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.from{
+    font-size: 25px;
+    color:blue;
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
+.to{
+    font-size: 25px;
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
+.change{
+    font-size: 35px;
+    transform: rotate(90deg);
+}
+
+.start, .end{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.search-section{
+    display: flex;
+    align-items: center;
+}
+
+.btn button{
+    font-size: 45px;
+    height: 50px;
+    width: 150px;
+    border-radius: 15px;
+    margin-top: 40px;
+    margin-left: 300px;
+    background-color: rgb(61, 61, 226);
+    color: #F6F5FF;
+}
+
+.search-section{
+    display: flex;
+    align-items: center;
+}
+
+#map{
+    margin-left: 460px;
+}

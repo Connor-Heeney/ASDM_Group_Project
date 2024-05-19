@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <title>Munro Database</title>
+
+    <!-- initialise Leaflet -->
+    <link rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+        crossorigin=""></script>
+
+    <!-- download and run the multi select script  -->
+    <script src="jsscripts/dataload.js"></script>
+
+    <!-- download and run the map script -->
+    <script defer src="jsscripts/mapping.js" type="module"></script> 
+</head>
+
+<body>
+    <nav class="sidebar">
+        <header>
+            <a href="https://www.ed.ac.uk/">
+                <img class="logo" src="./partner-university-edimburg.png" alt="">
+            </a>
+            <div class="image-text">
+                <div class="header-text">
+                    <span class="name">Directions</span>
+                </div>
+            </div>
+
+            <div class="targets">
+                <i class='bx bx-walk route'></i>
+                <i id="2" class='bx bx-restaurant restaurant'></i>
+                <i id="3" class='bx bx-hotel hotel'></i>
+                <i id="4" class='bx bxs-parking parking'></i>
+            </div>
+
+            <div class="search-section">
+                <div class="location">
+                    <div class="start">
+                        <i id="5" class='bx bxs-map from'></i>
+                        <form action="/location" method="get">
+                            <input type="text" name="query" placeholder="From...">
+                        </form>
+                    </div>
+
+                    <div class="end">
+                        <i id="6" class='bx bxs-map to'></i>
+                        <form action="/destination" method="get">
+                            <input type="text" name="query" placeholder="To...">
+                        </form>
+                    </div>
+                </div>
+
+                <i class='bx bx-transfer-alt change'></i>
+            </div>
+
+            <div class="btn">
+                <button type="button">Go</button>
+            </div>
+        </header>
+    </nav>
+     <!-- insert the mapping element -->
+    <div id="map" class="map-container" style="width: 82.5%; height: 100vh;"></div>
+
+    <div id="map" style="width: 82.5%; height: 100vh;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const map = L.map('map').setView([57.0600000, -3.6500000], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
+</body>
+
+</html>

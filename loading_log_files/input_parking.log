@@ -1,0 +1,53 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Wed Feb 14 12:02:21 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   input_parking.ctl
+Data File:      parking.sql
+  Bad File:     parking.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:   1:1 = 0X23(character '#'), in next physical record
+Path used:      Conventional
+
+Table S2559258.PARKING, loaded from every logical record.
+Insert option in effect for this table: TRUNCATE
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+PARKING                             FIRST     4           INTEGER              
+NAME                                 NEXT     *   |       CHARACTER            
+AREA                                 NEXT     *   |       CHARACTER            
+GEOM                              DERIVED     *           COLUMN OBJECT        
+
+*** Fields in GEOM
+SDO_GTYPE                            NEXT     4           INTEGER              
+SDO_ELEM_INFO                     DERIVED     *           VARRAY               
+    Terminator string : '|/'
+
+*** Fields in GEOM.SDO_ELEM_INFO
+ELEMENTS                            FIRST     4           FLOAT                
+*** End of fields in GEOM.SDO_ELEM_INFO
+
+SDO_ORDINATES                     DERIVED     *           VARRAY               
+    Terminator string : '|/'
+
+*** Fields in GEOM.SDO_ORDINATES
+ORDINATES                           FIRST     4           FLOAT                
+*** End of fields in GEOM.SDO_ORDINATES
+
+*** End of fields in GEOM
+
+
+SQL*Loader-926: OCI error while executing delete/truncate (due to REPLACE/TRUNCATE keyword) for table S2559258.PARKING
+ORA-01031: insufficient privileges
+

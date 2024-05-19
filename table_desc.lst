@@ -1,0 +1,62 @@
+SQL> describe munros
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MUNRO_ID                                  NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(255)
+ HEIGHT                                             NUMBER(6,2)
+ XCOORD                                    NOT NULL NUMBER(10,8)
+ YCOORD                                    NOT NULL NUMBER(10,8)
+ COMMENTS                                           VARCHAR2(255)
+ WALKER                                             NUMBER(2)
+ REGION                                             NUMBER(2)
+ GEOM                                               MDSYS.SDO_GEOMETRY
+
+SQL> describe walks
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WALK_ID                                   NOT NULL NUMBER(3)
+ LENGTH                                             NUMBER(5,2)
+ GEOM                                               MDSYS.SDO_GEOMETRY
+ POPULARITY                                         NUMBER(2)
+ DIFFICULTY                                         NUMBER(2)
+
+SQL> describe pubs
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PUB                                       NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(255)
+ XCOORD                                    NOT NULL NUMBER(10,8)
+ YCOORD                                    NOT NULL NUMBER(10,8)
+ RATING                                             NUMBER(2)
+ GEOM                                               MDSYS.SDO_GEOMETRY
+
+SQL> describe parking
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PARKING_ID                                NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(255)
+ AREA                                      NOT NULL NUMBER(8,2)
+ GEOM                                               MDSYS.SDO_GEOMETRY
+
+SQL> describe walker
+ERROR:
+ORA-04043: object walker does not exist 
+
+
+SQL> describe walkers
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WALKER                                    NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(255)
+
+SQL> describe regions
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGION_ID                                 NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(40)
+ GEOM                                               MDSYS.SDO_GEOMETRY
+ MIN_TEMP                                           NUMBER(4,2)
+ AVG_WIND                                           NUMBER(4,2)
+ AVG_PRECIP                                         NUMBER(6,2)
+
+SQL> spool off

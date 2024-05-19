@@ -1,0 +1,36 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Thu Feb 15 14:55:55 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   input_walks.ctl
+First primary datafile walk_data.csv has a
+ utf8 byte order mark in it.
+
+Data File:      walk_data.csv
+  Bad File:     walk_data.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table S2559258.WALKS, loaded from every logical record.
+Insert option in effect for this table: INSERT
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+WALK_ID                             FIRST     *   ,  O(") CHARACTER            
+LENGTH                               NEXT     *   ,  O(") CHARACTER            
+GEOM                                 NEXT     *   ,  O(") CHARACTER            
+POPULARITY                           NEXT     *   ,  O(") CHARACTER            
+DIFFICULTY                           NEXT     *   ,  O(") CHARACTER            
+
+SQL*Loader-418: Bad datafile datatype for column GEOM

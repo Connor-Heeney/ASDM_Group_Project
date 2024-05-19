@@ -1,0 +1,60 @@
+https://docs.oracle.com/en/database/oracle/oracle-database/19/spatl/spatial-operators-reference.html#GUID-85422854-5133-4F1D-BF0E-228CA6EDAF87
+
+
+https://gis.stackexchange.com/questions/201699/sql-for-spatial-view-of-line-start-end-points-oracle-st-geometry
+start points?
+SELECT OBJECTID, SDE.ST_GEOMETRY (SDE.ST_ASTEXT (SDE.ST_STARTPOINT (SHAPE)),300049) 
+    AS START_POINT 
+FROM ENG.ROAD
+
+
+https://docs.oracle.com/cd/A97630_01/appdev.920/a96630/sdo_cs_ref.htm#i81297
+- transform tables into bng?
+
+
+# want to transform tables to be in bng for sensible query distances
+
+
+
+
+SELECT W.WALK_ID, P.NAME Parking, P.AREA
+from WALKS W, PARKING P
+WHERE SDO_WITHIN_DISTANCE(W.GEOM, P.GEOM, 'distance=10') = 'True'
+AND P.AREA >
+    (SELECT AVG(AREA)
+    FROM s2559258.PARKING)
+
+
+
+    AND P.RATING = 5
+
+
+select W.WALK_ID, P.NAME, P.RATING 
+FROM TABLE(SDO_JOIN('WALKS', 'GEOM', 
+                      'PUBS', 'GEOM',
+                      'mask=ANYINTERACT'
+                      )) 
+    C,
+    WALKS W, 
+    PUBS P
+WHERE c.rowid1 = W.rowid AND c.rowid2 = P.rowid
+
+/
+
+select W.WALK_ID, M.NAME
+FROM TABLE(SDO_JOIN('WALKS', 'GEOM', 
+                      'MUNROS', 'GEOM',
+                      'mask=ANYINTERACT'
+                      )) 
+    C,
+    WALKS W, 
+    MUNROS M
+WHERE c.rowid1 = W.rowid AND c.rowid2 = M.rowid
+and count(c.rowid1) > 1
+/#
+
+  notes:
+  queries not working because conflicting crs? - fixed by updatating crs in metadata table.
+
+  select sdo_geom.validate_geometry_with_context(geom, 0.05) as validation_result, walk_id from walks;
+  - walks with invalid geometry

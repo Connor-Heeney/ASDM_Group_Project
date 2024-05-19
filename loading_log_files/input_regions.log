@@ -1,0 +1,33 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Wed Feb 14 12:07:51 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   input_regions.ctl
+Data File:      regions.sql
+  Bad File:     regions.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table S2559258.REGIONS, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+GEOM                                FIRST     *   ,  O(") CHARACTER            
+    SQL string for column : "MDSYS.SDO_GEOMETRY"
+MIN_TEMP                             NEXT     *   ,  O(") CHARACTER            
+AVG_WIND                             NEXT     *   ,  O(") CHARACTER            
+AVG_PRECIP                           NEXT     *   ,  O(") CHARACTER            
+
+SQL*Loader-418: Bad datafile datatype for column GEOM

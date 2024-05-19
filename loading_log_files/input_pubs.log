@@ -1,0 +1,172 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Wed Feb 14 11:27:14 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   input_pubs.ctl
+Data File:      pubs.sql
+  Bad File:     pubs.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table S2559258.PUBS, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+PUB                                 FIRST     *   ,  O(') CHARACTER            
+NAME                                 NEXT     *   ,  O(') CHARACTER            
+XCOORD                               NEXT     *   ,  O(') CHARACTER            
+YCOORD                               NEXT     *   ,  O(') CHARACTER            
+RATING                               NEXT     *   ,  O(') CHARACTER            
+    SQL string for column : "CASE WHEN :RATING = 'NULL' THEN NULL ELSE :RATING END"
+
+Record 3: Discarded - all columns null.
+Record 6: Discarded - all columns null.
+Record 9: Discarded - all columns null.
+Record 12: Discarded - all columns null.
+Record 15: Discarded - all columns null.
+Record 18: Discarded - all columns null.
+Record 21: Discarded - all columns null.
+Record 24: Discarded - all columns null.
+Record 27: Discarded - all columns null.
+Record 30: Discarded - all columns null.
+Record 33: Discarded - all columns null.
+Record 36: Discarded - all columns null.
+Record 39: Discarded - all columns null.
+Record 42: Discarded - all columns null.
+Record 45: Discarded - all columns null.
+Record 48: Discarded - all columns null.
+Record 1: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 2: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 4: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 5: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 7: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 8: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 10: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 11: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 13: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 14: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 16: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 17: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 19: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 20: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 22: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 23: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 25: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 26: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 28: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 29: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 31: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 32: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 34: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 35: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 37: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 38: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 40: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 41: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 43: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 44: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 46: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 47: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 49: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+Record 50: Rejected - Error on table S2559258.PUBS, column PUB.
+ORA-01722: invalid number
+
+
+Table S2559258.PUBS:
+  0 Rows successfully loaded.
+  34 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  16 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 322500 bytes(250 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:            50
+Total logical records rejected:        34
+Total logical records discarded:       16
+
+Run began on Wed Feb 14 11:27:14 2024
+Run ended on Wed Feb 14 11:27:21 2024
+
+Elapsed time was:     00:00:06.98
+CPU time was:         00:00:00.04

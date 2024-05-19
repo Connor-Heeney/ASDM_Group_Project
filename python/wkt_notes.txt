@@ -1,0 +1,114 @@
+--walks_for_munros.sql - munro geom potentially deprecates query
+
+'SELECT SDO_UTIL.TO_WKTGEOMETRY(wlk.geom) as walk_geom, SDO_UTIL_TO_WKTGEOMETRY(mun.geom) AS munro_geom, wlk.walk_id
+FROM s2559258.walks wlk
+WHERE EXISTS (SELECT 1 FROM s2559258.munros mun WHERE mun.munro_id = &Munro_ID
+AND SDO_GEOM.SDO_INTERSECTION(wlk.geom, mun.geom, 0.5) IS NOT NULL)'
+
+--time.sql
+
+'SELECT w.WALK_ID, SDO_UTIL.TO_WKTGEOMETRY(w.geom) AS walk_geom, SDO_UTIL.TO_WKTGEOMETRY(m.geom) AS munro_geom, (m.HEIGHT/10 + w.LENGTH*15) /60 AS time_taken_hours
+FROM s2559258.WALKS w
+JOIN S2559258.MUNROS m ON SDO_CONTAINS(w.GEOM, m.GEOM) = 'TRUE''
+
+--munros_around_munro.sql
+
+'SELECT SDO_UTIL.TO_WKTGEOMETRY(m1.geom) AS geom, m1.munro_id AS starting_point, m2.munro_id AS surrounding_munros
+FROM s2559258.munros m1, s2559258.munros m2
+WHERE m1.munro_id <> m2.munro_id AND m1.munro_id = &user_munro_id
+ORDER BY SDO_GEOM.SDO_DISTANCE(m1.geom, m2.geom, 0.005) ASC
+FETCH FIRST &returned_rows ROWS ONLY'
+
+--munro_cluster.sql
+
+'SELECT /*+ INDEX(m munro_spatial_idx) */
+SDO_UTIL.TO_WKTGEOMETRY(M.GEOM) AS geom, M.MUNRO_ID, M.NAME , SDO_NN_DISTANCE(10) DIST
+FROM s2559258.MUNROS M  
+WHERE SDO_NN(m.geom,  sdo_geometry(2001, 8307, 
+sdo_point_type(10,7,NULL), NULL,  NULL),
+'sdo_num_res=5', 10) = 'TRUE' 
+ORDER BY DIST'
+
+
+--find_pubs.sql
+
+'WITH StartingPoints AS (
+    SELECT
+        w.WALK_ID,
+        V.X AS START_X,
+        V.Y AS START_Y,
+        ROW_NUMBER() OVER (PARTITION BY w.WALK_ID ORDER BY V.ID) AS RN
+    FROM
+        S2559258.WALKS w,
+        TABLE(SDO_UTIL.GETVERTICES(w.GEOM)) V
+),
+NearestPubs AS (
+    SELECT
+        sp.WALK_ID,
+        sp.START_X,
+        sp.START_Y,
+        pb.PUB,
+        SDO_GEOM.SDO_DISTANCE(
+            SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE(sp.START_X, sp.START_Y, NULL), NULL, NULL),
+            SDO_UTIL_TO_WKTGEOMETRY(pb.GEOM) AS geom,
+            0.005
+        ) AS DISTANCE,
+        ROW_NUMBER() OVER (PARTITION BY sp.WALK_ID ORDER BY SDO_GEOM.SDO_DISTANCE(
+            SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE(sp.START_X, sp.START_Y, NULL), NULL, NULL),
+            pb.GEOM,
+            0.005
+        )) AS PUB_RANK
+    FROM
+        StartingPoints sp
+    CROSS JOIN
+        S2559258.PUBS pb
+    WHERE
+        sp.RN = 1
+)
+SELECT
+    np.WALK_ID,
+    np.START_X,
+    np.START_Y,
+    np.PUB,
+    np.DISTANCE,
+    SDO_UTIL.TO_WKTGEOMETRY(w.GEOM) AS walk_geom,
+    SDO_UTIL.TO_WKTGEOMETRY(pb.GEOM) AS pub_geom
+FROM
+    NearestPubs np
+JOIN
+    S2559258.WALKS w ON np.WALK_ID = w.WALK_ID
+WHERE
+    np.PUB_RANK = 1'
+
+
+--parking_rating.sql
+
+--find_parking.sql
+SELECT distinct /*+ ordered */ SDO_UTIL.TO_WKTGEOMETRY(W.GEOM) AS WALK_GEOM, SDO_UTIL.TO_WKTGEOMETRY(P.GEOM) AS PARKING_GEOM, W.WALK_ID, P.NAME, P.AREA
+FROM TABLE(SDO_JOIN('WALKS', 'GEOM', 'parking_bufs', 'GEOM','mask=ANYINTERACT')) c, 
+(SDO_JOIN('PARKING', 'GEOM', 'parking_bufs', 'GEOM','mask=ANYINTERACT')) d,
+s2559258.WALKS W, s2559258.Parking P, s2559258.parking_bufs B
+WHERE c.rowid1 = w.rowid AND c.rowid2 = B.rowid
+and d.rowid1 = P.rowid AND d.rowid2 = B.rowid
+AND P.AREA >
+(SELECT AVG(AREA)
+FROM s2559258.PARKING)
+
+
+
+--pub_rating.sql
+
+SELECT distinct /*+ ordered */ SDO_UTIL.TO_WKTGEOMETRY(W.GEOM) AS WALK_GEOM, SDO_UTIL.TO_WKTGEOMETRY(P.GEOM) AS PUB_GEOM, W.WALK_ID, P.NAME, P.RATING
+FROM TABLE(SDO_JOIN('WALKS', 'GEOM', 'PUB_BUFS', 'GEOM','mask=ANYINTERACT')) c,
+(SDO_JOIN('PUBS', 'GEOM', 'PUB_BUFS', 'GEOM','mask=ANYINTERACT')) d,
+WALKS W, PUBS P, pub_bufs B
+WHERE c.rowid1 = w.rowid AND c.rowid2 = B.rowid
+and d.rowid1 = P.rowid AND d.rowid2 = B.rowid
+AND P.rating = 5
+
+
+--Can't add geom:
+
+- height.sql
+- total_length_walks_in_region.sql
+- walks_for_multiple_munros.sql -NOT WORK
